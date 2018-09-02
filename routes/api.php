@@ -19,7 +19,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 */
 
-Route::group(['namespace' => 'Api', 'prefix' => env('VERSION_API', 'v1')], function () {
+Route::post('auth', 'Auth\AuthenticateController@authenticate');
+Route::post('auth-refresh', 'Auth\AuthenticateController@refreshToken');
+Route::get('user', 'Auth\AuthenticateController@getAuthenticatedUser');
+
+Route::group([
+	// 'middleware' => 'jwt.auth', // Caso utilize sem trocar o guard no config/auth.php
+	'middleware' => 'auth:api',
+	'namespace' => 'Api',
+	'prefix' => env('VERSION_API', 'v1')], function () {
 	Route::get('categories/{id}/products', 'CategoryController@products');
 	Route::apiResource('categories', 'CategoryController');
 	Route::apiResource('products', 'ProductController');
