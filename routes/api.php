@@ -25,7 +25,7 @@ Route::get('user', 'Auth\AuthenticateController@getAuthenticatedUser');
 
 Route::group([
 	// 'middleware' => 'jwt.auth', // Caso utilize sem trocar o guard no config/auth.php
-	'middleware' => 'auth:api',
+	// 'middleware' => 'auth:api',
 	'namespace' => 'Api',
 	'prefix' => env('VERSION_API', 'v1')], function () {
 	Route::get('categories/{id}/products', 'CategoryController@products');

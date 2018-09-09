@@ -24,8 +24,8 @@ class ProductFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' 			=> "required|min:3|max:10|unique:products,name,{$this->segment(3)},id",
-			'description' 	=> 'min:3|max:1000',
+            'name' 			=> "required|min:3|max:100|unique:products,name,{$this->segment(4)},id",
+			'description' 	=> 'max:1000',
 			'image' 		=> 'image',
 			'category_id' 	=> 'required|exists:categories,id'
         ];

@@ -16,7 +16,7 @@ class Product extends Model
 	public function getProducts($data, $total = 15)
 	{
 		if (!isset($data['filter']) && !isset($data['name']) && !isset($data['description'])) {
-			return $this->paginate($total);
+			return $this->orderBy('updated_at', 'desc')->paginate($total);
 		}
 
 		$query = $this->where(function ($query) use ($data) {
@@ -33,7 +33,9 @@ class Product extends Model
 			if (isset($data['description'])) {
 				$query->where('description', 'LIKE', "%{$data['description']}%");
 			}
-		})->paginate($total);
+		})
+		->orderBy('updated_at')
+		->paginate($total);
 		// ->toSql(); // toSql()
 		// dd($query);
 		return $query;
