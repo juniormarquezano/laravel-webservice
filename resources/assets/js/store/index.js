@@ -6,6 +6,8 @@ import mutations from './mutations'
 
 import categories from './modules/categories'
 import products from './modules/products'
+import cart from './modules/cart'
+import auth from './modules/auth'
 
 Vue.use(Vuex)
 
@@ -14,7 +16,9 @@ const store = new Vuex.Store({
   mutations,
   modules: {
     categories,
-    products
+    products,
+    cart,
+    auth
   }
 })
 

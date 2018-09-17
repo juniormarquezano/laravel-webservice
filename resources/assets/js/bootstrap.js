@@ -1,6 +1,7 @@
 
 // window._ = require('lodash');
 // window.Popper = require('popper.js').default;
+import { TOKEN } from './services/http'
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -35,6 +36,11 @@ if (token) {
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+}
+
+const token_auth = localStorage.getItem(TOKEN)
+if (token_auth) {
+    window.axios.defaults.headers.common['Authorization'] = `Bearer ${token_auth}`;
 }
 
 /**

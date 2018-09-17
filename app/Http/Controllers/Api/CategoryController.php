@@ -22,6 +22,8 @@ class CategoryController extends Controller
 	{
 		/** @var \Illuminate\Database\Eloquent\Builder $category */
 		$this->category = $category;
+
+		$this->middleware('auth:api')->except(['index']);
 	}
 
 	/**

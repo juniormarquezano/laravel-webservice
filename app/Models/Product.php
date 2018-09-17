@@ -15,7 +15,7 @@ class Product extends Model
 
 	public function getProducts($data, $total = 15)
 	{
-		if (!isset($data['filter']) && !isset($data['name']) && !isset($data['description'])) {
+		if (!isset($data['filter']) && !isset($data['name']) && !isset($data['description']) && !isset($data['category_id'])) {
 			return $this->orderBy('updated_at', 'desc')->paginate($total);
 		}
 
@@ -28,6 +28,10 @@ class Product extends Model
 
 			if (isset($data['name'])) {
 				$query->where('name', $data['name']);
+			}
+
+			if (isset($data['category_id'])) {
+				$query->where('category_id', $data['category_id']);
 			}
 
 			if (isset($data['description'])) {

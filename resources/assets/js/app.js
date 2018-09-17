@@ -1,7 +1,7 @@
 require('./bootstrap');
 window.Vue = require('vue');
 import Snotify, { SnotifyPosition } from 'vue-snotify'
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 import router from './routes'
 import store from './store'
@@ -23,7 +23,15 @@ Vue.component('preloader', require('./components/layouts/preloader'))
 const app = new Vue({
   el: '#app',
   router,
-  store
+  store,
+  methods: {
+    ...mapActions(['getCategories', 'checkLogin'])
+  },
+  mounted() {
+    this.getCategories()
+    this.checkLogin()
+      .then(() => router.push({ name: store.state.auth.urlBack }))
+  },
 });
 
-store.dispatch('getCategories')
+//store.dispatch('getCategories')

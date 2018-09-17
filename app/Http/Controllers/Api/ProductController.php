@@ -25,6 +25,8 @@ class ProductController extends Controller
 	{
 		/** @var \Illuminate\Database\Eloquent\Builder $product */
 		$this->product = $product;
+
+		$this->middleware('auth:api')->except(['index', 'show']);
 	}
 
 	/**
