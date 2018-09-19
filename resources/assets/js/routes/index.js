@@ -15,6 +15,8 @@ import ContactComponent from '../components/website/pages/contact/Contact'
 import Product from '../components/website/pages/products/Product'
 import CartComponent from '../components/website/pages/cart/Cart'
 import LoginComponent from '../components/website/pages/auth/Login'
+import RegisterComponent from '../components/website/pages/user/Register'
+import ProfileComponent from '../components/website/pages/user/Profile'
 
 Vue.use(VueRouter)
 
@@ -27,7 +29,8 @@ const routes = [
       { path: 'contato', component: ContactComponent, name: 'contact' },
       { path: 'products/:id', component: Product, name: 'product', props: true },
       { path: 'cart', component: CartComponent, name: 'cart' },
-      { path: 'login', component: LoginComponent, name: 'auth.login', meta: { auth: false } }
+      { path: 'login', component: LoginComponent, name: 'auth.login', meta: { auth: false } },
+      { path: 'register', component: RegisterComponent, name: 'user.register', meta: { auth: false } }
     ]
   },
   {
@@ -40,6 +43,7 @@ const routes = [
       { path: 'categories/create', component: CategoryCreate, name: 'category.create' },
       { path: 'categories/:id/edit', component: CategoryEdit, name: 'category.edit', props: true },
       { path: 'products', component: ProductIndex, name: 'product.index', meta: { auth: true } },
+      { path: 'profile', component: ProfileComponent, name: 'user.profile', meta: { auth: true } },
     ]
   }
 ]
@@ -59,7 +63,7 @@ router.beforeEach((to, from, next) => {
     store.commit('CHANGE_URL', to.name)
     return router.push({ name: 'auth.login' })
   }
-  
+
   // verifica se o meta auth é true e se o usuário não está autenticado
   if (auth_router && !user_logged) {
     store.commit('CHANGE_URL', to.name)

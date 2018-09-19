@@ -17,6 +17,7 @@
                 <input type="password" class="form-control" id="InputPassword" placeholder="Password" v-model="user.password">
               </div>
               <button type="submit" class="btn btn-primary">Submit</button>
+              <router-link :to="{ name: 'user.register' }" class="btn btn-success">Registre-se</router-link>
             </form>
           </div>
         </div>
@@ -26,7 +27,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   name: 'Login',
   data () {
@@ -41,7 +42,7 @@ export default {
     ...mapActions(['authenticate']),
     login () {
       this.authenticate(this.user)
-        .then(() => this.$router.push({ name: 'dashboard.index'}))
+        .then(() => this.$router.push({ name: 'dashboard.index' }))
         .catch(() => {
           this.$snotify.error('Falha ao acessar...', 'Dados Inválidos')
         })

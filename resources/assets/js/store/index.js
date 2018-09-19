@@ -8,6 +8,7 @@ import categories from './modules/categories'
 import products from './modules/products'
 import cart from './modules/cart'
 import auth from './modules/auth'
+import users from './modules/users'
 
 Vue.use(Vuex)
 
@@ -18,7 +19,8 @@ const store = new Vuex.Store({
     categories,
     products,
     cart,
-    auth
+    auth,
+    users
   }
 })
 

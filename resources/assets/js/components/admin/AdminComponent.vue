@@ -17,6 +17,7 @@
               <router-link :to="{ name: 'product.index'}" class="nav-link">Produtos</router-link>
             </li>
           </ul>
+          <!--
           <ul class="navbar-nav float-right">
             <li class="nav-item">
               <a href="" class="nav-link">{{ user.name }}</a>
@@ -25,6 +26,8 @@
               <a href="" @click.prevent="logout()" class="nav-link">Logout</a>
             </li>
           </ul>
+          -->
+          <header-user></header-user>
         </div>
       </div>
     </nav>
@@ -35,18 +38,23 @@
 </template>
 
 <script>
+import HeaderUser from '../layouts/HeaderUser'
 import { mapGetters, mapState, mapActions } from 'vuex'
 
 export default {
   name: 'AdminComponent',
+  components: { HeaderUser },
   methods: {
+    /*
     ...mapActions(['auth_logout']),
     logout () {
       this.auth_logout()
       this.$router.push({name: 'auth.login'})
     }
+    */
   },
   computed: {
+    /*
     ...mapState({
       user: state => state.auth.user
     }),

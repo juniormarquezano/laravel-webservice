@@ -7,10 +7,10 @@ const authenticate = ({ commit }, payload) => {
   return new Promise((resolve, reject) => {
     axios.post(`api/auth`, payload)
       .then(response => {
-        commit('AUTH_USER', response.data.user)
         const token = response.data.token
         localStorage.setItem(TOKEN, token)
         window.axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        commit('AUTH_USER', response.data.user)
         resolve()
       })
       .catch(error => reject(error.response.data))

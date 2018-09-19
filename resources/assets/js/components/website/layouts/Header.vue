@@ -18,17 +18,7 @@
               <router-link :to="{ name: 'cart'}" class="nav-link">Carrinho ({{ cart.length }})</router-link>
             </li>
           </ul>
-          <ul class="navbar-nav float-right">
-            <li class="nav-item text-center">
-              <div v-if="logged">
-                <a href="" @click.prevent="logout()" class="nav-link float-right">Logout</a>
-                <router-link :to="{ name: 'dashboard.index'}" class="nav-link float-right">
-                  Olá, {{ user.name }}
-                </router-link>
-              </div>
-              <router-link v-else :to="{ name: 'auth.login'}" class="nav-link float-right">Login</router-link>
-            </li>
-          </ul>
+          <header-user></header-user>
         </div>
       </div>
     </nav>
@@ -36,18 +26,23 @@
 </template>
 
 <script>
+import HeaderUser from '../../layouts/HeaderUser'
 import { mapState, mapActions } from 'vuex'
 export default {
+  name: 'Header',
+  components: { HeaderUser },
   methods: {
+    /*
     ...mapActions(['auth_logout']),
     logout () {
       this.auth_logout()
     }
+    */
   },
   computed: mapState({
     cart: state => state.cart.products,
-    user: state => state.auth.user,
-    logged: state => state.auth.authenticated 
+    //user: state => state.auth.user,
+    //logged: state => state.auth.authenticated
   })
 }
 </script>

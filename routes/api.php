@@ -19,9 +19,26 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 */
 
-Route::post('auth', 'Auth\AuthenticateController@authenticate');
-Route::post('auth-refresh', 'Auth\AuthenticateController@refreshToken');
-Route::get('user', 'Auth\AuthenticateController@getAuthenticatedUser');
+Route::namespace('Auth\Api')
+	->group(function () {
+		// Authenticated
+		Route::post('auth', 'AuthenticateController@authenticate');
+		Route::post('auth-refresh', 'AuthenticateController@refreshToken');
+		Route::get('user', 'AuthenticateController@getAuthenticatedUser');
+		// Register and Update
+		Route::post('register', 'RegisterController@register');
+		Route::put('update', 'RegisterController@updated');
+});
+
+/*
+Route::group(['namespace' => 'Auth\Api' ], function () {
+	Route::post('auth', 'AuthenticateController@authenticate');
+	Route::post('auth-refresh', 'AuthenticateController@refreshToken');
+	Route::get('user', 'AuthenticateController@getAuthenticatedUser');
+	Route::post('register', 'AuthenticateController@register');
+	Route::put('update', 'AuthenticateController@updated');
+});
+*/
 
 Route::group([
 	// 'middleware' => 'jwt.auth', // Caso utilize sem trocar o guard no config/auth.php
